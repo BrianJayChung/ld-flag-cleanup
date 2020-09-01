@@ -110,10 +110,10 @@ class LaunchDarklyApi():
     def delete_flag(self, feature_flag: str, project_key: str):
         try:
             resp = self.feature.delete_feature_flag(project_key, feature_flag)
+            LOG.info("Deleting flag {0}.".format(feature_flag))
         except launchdarkly_api.rest.ApiException as ex:
-            msg = "Unable to delete flag."
+            msg = "Unable to delete flag.".format(feature_flag)
             resp = "API response was {0} {1}.".format(ex.status, ex.reason)
             LOG.error("%s %s", msg, resp)
-            sys.exit(1)
 
         return resp
